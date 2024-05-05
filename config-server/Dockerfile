@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.11_9-jre-focal
+FROM bellsoft/liberica-openjdk-alpine
 LABEL authors="abhisheksarkar30"
 ADD target/config-server-*.jar config-server.jar
 EXPOSE 8888

@@ -7,8 +7,8 @@ spring:
         git:
           uri: https://github.com/abhisheksarkar30/server-configs
           default-label: main
-          username: does-not-matter
-          password: override-on-config
+          username: does-not-matter # for private repo
+          password: override-on-config # for private repo
           search-paths: limits-service
           clone-on-start: true
     bus:
