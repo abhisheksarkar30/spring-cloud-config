@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/abhisheksarkar30/server-configs
+          default-label: main
+          username: does-not-matter
+          password: override-on-config
+          search-paths: limits-service
+          clone-on-start: true
+    bus:
+      enabled: false
+server:
+  port: 8888
