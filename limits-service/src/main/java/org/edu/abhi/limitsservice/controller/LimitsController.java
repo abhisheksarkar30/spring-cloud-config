@@ -18,7 +18,7 @@ public class LimitsController {
     @Autowired
     private Environment env;
 
-    @Value("${limits-service.min}")
+    @Value("${limits-service.min}") //This annotation won't work with complex structure for dynamic refresh
     private int min;
 
     @GetMapping("/limitsByConfig")

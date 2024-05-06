@@ -11,6 +11,8 @@ spring:
           password: override-on-config # for private repo
           search-paths: limits-service
           clone-on-start: true
+          deleteUntrackedBranches: true # to remove local branches which are removed from remote
+          force-pull: true # to resolve dirty-local-state issue
     bus:
       enabled: false
 server:
