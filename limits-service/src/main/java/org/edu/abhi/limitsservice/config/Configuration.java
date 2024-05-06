@@ -44,6 +44,9 @@ public class Configuration {
 
     @PostConstruct //will run for every hit to config refresh endpoint
     private void setConfig() {
+        //@ConfigurationProperties dynamically refreshes each node/variable directly from config files
+        //any app bean (like singleton) which keeps old config cached needs to be manually refreshed
+        //either by re-registering a new bean instead to the bean context container or setting new value inside 
         localNode = node.get("second");
         System.out.println("executed");
     }
