@@ -13,4 +13,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, busrefresh
+        include:
+        - refresh
+        - busrefresh # previously known as bus-refresh
