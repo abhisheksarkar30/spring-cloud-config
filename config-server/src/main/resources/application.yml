@@ -6,14 +6,14 @@ spring:
       server:
         git:
           uri: https://github.com/abhisheksarkar30/server-configs
-          default-label: main
+          default-label: main # the default config branch if nothing specified while running the app
           username: does-not-matter # for private repo
           password: override-on-config # for private repo
-          search-paths: limits-service
-          clone-on-start: true
+          search-paths: limits-service # to search specified directories in the repository also along with root directory
+          clone-on-start: true # to clone and verify on startup if the git configuration is proper
           deleteUntrackedBranches: true # to remove local branches which are removed from remote
           force-pull: true # to resolve dirty-local-state issue
     bus:
-      enabled: false
+      enabled: true
 server:
   port: 8888
