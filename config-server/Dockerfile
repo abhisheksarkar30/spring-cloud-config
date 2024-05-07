@@ -1,5 +1,6 @@
 FROM bellsoft/liberica-openjdk-alpine
 LABEL authors="abhisheksarkar30"
+# Below is documentation of listening port which should be published to run a container of this image
 EXPOSE 8888
 ENV APP_NAME=config-server
 ADD target/${APP_NAME}*.jar ${APP_NAME}.jar
