@@ -1,0 +1,19 @@
+services:
+  config-server:
+    build: config-server
+    healthcheck:
+      test: [ "CMD-SHELL", "netstat -nl | grep 8888"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  config-client:
+    build: limits-service
+    environment:
+      - CONFIG_SERVER_URL=http://config-server:8888
+    depends_on:
+      config-server:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8080:8080"
