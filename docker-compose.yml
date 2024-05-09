@@ -3,6 +3,11 @@ services:
     build: config-server
     env_file:
       - .env
+    command: [""]
+    depends_on:
+      rabbit-mq:
+        condition: service_healthy
+        restart: true
     healthcheck:
       test: [ "CMD-SHELL", "netstat -nl | grep 8888"]
       interval: 15s
