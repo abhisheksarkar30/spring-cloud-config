@@ -1,19 +1,65 @@
 services:
   config-server:
     build: config-server
+    env_file:
+      - .env
     healthcheck:
       test: [ "CMD-SHELL", "netstat -nl | grep 8888"]
       interval: 15s
       timeout: 5s
       retries: 3
 
-  config-client:
+  config-client1:
     build: limits-service
     environment:
       - CONFIG_SERVER_URL=http://config-server:8888
+    env_file:
+      - .env
     depends_on:
       config-server:
         condition: service_healthy
         restart: true
+      rabbit-mq:
+        condition: service_healthy
+        restart: true
     ports:
       - "8080:8080"
+
+  config-client2:
+    build: limits-service
+    environment:
+      - CONFIG_SERVER_URL=http://config-server:8888
+    env_file:
+      - .env
+    depends_on:
+      config-server:
+        condition: service_healthy
+        restart: true
+      rabbit-mq:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8081:8080"
+
+  rabbit-mq:
+    image: bitnami/rabbitmq
+    env_file:
+      - .env
+    entrypoint: sh -c "
+      nohup /opt/bitnami/scripts/rabbitmq/entrypoint.sh /opt/bitnami/scripts/rabbitmq/run.sh>&1 
+      & echo Pre-sleep 
+      && until rabbitmqctl add_user test test; 
+      do echo 'Try again'; 
+      sleep 10; done 
+      && rabbitmqctl set_user_tags test administrator 
+      && rabbitmqctl set_permissions -p / test '.*' '.*' '.*' 
+      && echo going-for-infinite-sleep 
+      && sleep infinity"
+    ports:
+      - "15672:15672"
+    healthcheck:
+      test: [ "CMD-SHELL", "rabbitmqctl list_permissions | grep test"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
