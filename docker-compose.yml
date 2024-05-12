@@ -56,15 +56,15 @@ services:
     env_file:
       - .env
     entrypoint: sh -c "
-      nohup /opt/bitnami/scripts/rabbitmq/entrypoint.sh /opt/bitnami/scripts/rabbitmq/run.sh>&1 
-      & echo Pre-sleep 
-      && until rabbitmqctl list_users | grep ${RABBITMQ_USER} || rabbitmqctl add_user ${RABBITMQ_USER} ${RABBITMQ_PASSWORD}; 
+      nohup /opt/bitnami/scripts/rabbitmq/entrypoint.sh /opt/bitnami/scripts/rabbitmq/run.sh 
+      & echo 'Waiting to create user...' 
+      && until sleep 25s && rabbitmqctl list_users | grep ${RABBITMQ_USER} || rabbitmqctl add_user ${RABBITMQ_USER} ${RABBITMQ_PASSWORD}; 
       do echo 'Try again'; 
-      sleep 10; done 
+      sleep 5; done 
       && rabbitmqctl set_user_tags ${RABBITMQ_USER} administrator 
-      && rabbitmqctl set_permissions -p / ${RABBITMQ_USER} '.*' '.*' '.*' 
-      && echo going-for-infinite-sleep 
-      && sleep infinity"
+      && rabbitmqctl set_permissions -p / ${RABBITMQ_USER} '.*' '.*' '.*'
+      && trap 'rabbitmqctl stop' TERM
+      && wait $(pgrep -f rabbitmq-server)"
     ports:
       - "15672:15672"
     healthcheck:
