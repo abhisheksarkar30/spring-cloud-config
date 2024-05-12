@@ -65,6 +65,12 @@ services:
       && rabbitmqctl set_permissions -p / ${RABBITMQ_USER} '.*' '.*' '.*'
       && trap 'rabbitmqctl stop' TERM
       && wait $(pgrep -f rabbitmq-server)"
+    # docker lifecycle depends on PID #1 which includes the primary process rabbitmq executed as nohup
+    # thus, if we don't wait for the specific rabbitmq server PID to exit, the container will shutdown
+    # even if the mq server is not stopped, there by killing the process entirely.
+
+    # This was a special case though, in other cases like config-server/client above, the long-running
+    # server process being the primary one and active on foreground, won't let the container die.
     ports:
       - "15672:15672"
     healthcheck:
