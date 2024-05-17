@@ -24,6 +24,9 @@ services:
     environment:
       - spring.rabbitmq.username=${RABBITMQ_USER}
       - spring.rabbitmq.password=${RABBITMQ_PASSWORD}
+      - spring.profiles.active=lower
+      - spring.cloud.config.profile=dev
+#      - logging.file.path=/app/logs/limits-service # logs persistence not required as of now
     depends_on:
       config-server:
         condition: service_healthy
@@ -33,6 +36,8 @@ services:
         restart: true
     ports:
       - "8080:8080"
+#    volumes: # logs persistence not required as of now
+#      - ./:/app
 
 #  config-client2:
 #    build: limits-service
