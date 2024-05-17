@@ -1,0 +1,8 @@
+spring:
+# For test, either keep cloud config-server disabled or put optional config-server url unless test config is in same
+# server which is always up or at least during test phase
+#  cloud:
+#    config:
+#      enabled: false
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}

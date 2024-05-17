@@ -1,13 +1,6 @@
 spring:
   application:
     name: limits-service
-  config:
-    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888} # Only to be placed on env specific profile if exists, else will hit dual calls
-  profiles:
-    active: dev
-
-server:
-  port: 8080
 
 management:
   endpoints:
