@@ -15,5 +15,10 @@ spring:
           force-pull: true # to resolve dirty-local-state issue
     bus:
       enabled: true
+
+config:
+  username: ${CONFIG_USER:admin}
+  password: ${CONFIG_PASS:admin}
+
 server:
   port: 8888
