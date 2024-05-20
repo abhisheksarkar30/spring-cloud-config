@@ -3,7 +3,7 @@ services:
     build: config-server
     env_file:
       - .env
-    command: ["--spring.rabbitmq.username=${RABBITMQ_USER}", "--spring.rabbitmq.password=${RABBITMQ_PASSWORD}"]
+    command: [""]
     depends_on:
       rabbit-mq:
         condition: service_healthy
@@ -17,14 +17,12 @@ services:
 #      mode: replicated
 #      replicas: 2
 
-  config-client:
+  client-dev:
     build: limits-service
     env_file:
       - .env
     environment:
-      - spring.rabbitmq.username=${RABBITMQ_USER}
-      - spring.rabbitmq.password=${RABBITMQ_PASSWORD}
-      - spring.profiles.active=lower
+      - spring.profiles.active=nonprod
       - spring.cloud.config.profile=dev
 #      - logging.file.path=/app/logs/limits-service # logs persistence not required as of now
     depends_on:
@@ -39,13 +37,13 @@ services:
 #    volumes: # logs persistence not required as of now
 #      - ./:/app
 
-#  config-client2:
+#  client-dev2:
 #    build: limits-service
 #    env_file:
 #      - .env
 #    environment:
-#      - spring.rabbitmq.username=${RABBITMQ_USER}
-#      - spring.rabbitmq.password=${RABBITMQ_PASSWORD}
+#      - spring.profiles.active=nonprod
+#      - spring.cloud.config.profile=dev
 #    depends_on:
 #      config-server:
 #        condition: service_healthy
@@ -71,7 +69,7 @@ services:
       && trap 'rabbitmqctl stop' TERM
       && wait $(pgrep -f rabbitmq-server)"
     # docker lifecycle depends on PID #1 which includes the primary process rabbitmq executed as nohup
-    # thus, if we don't wait for the specific rabbitmq server PID to exit, the container will shutdown
+    # thus, if we don't wait for the specific rabbitmq server PID to exit, the container will shut down
     # even if the mq server is not stopped, there by killing the process entirely.
 
     # This was a special case though, in other cases like config-server/client above, the long-running

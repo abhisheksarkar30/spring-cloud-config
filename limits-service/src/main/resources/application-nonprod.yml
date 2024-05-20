@@ -7,6 +7,9 @@ spring:
     config:
       username: ${CONFIG_USER:admin}
       password: ${CONFIG_PASS:admin}
+  rabbitmq:
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
 
 server:
   port: 8080

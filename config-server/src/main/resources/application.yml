@@ -15,6 +15,9 @@ spring:
           force-pull: true # to resolve dirty-local-state issue
     bus:
       enabled: true # default : true
+  rabbitmq:
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
 
 config:
   username: ${CONFIG_USER:admin}
