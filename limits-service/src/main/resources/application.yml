@@ -1,12 +1,6 @@
 spring:
   application:
     name: limits-service
+
 # Never put config-server url on default profile application.properties/yml if env specific URL exists
 # due to the nature of spring cloud config in such case to not override but hit both default and specific profile URLs
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-        - refresh
-        - busrefresh # previously known as bus-refresh
