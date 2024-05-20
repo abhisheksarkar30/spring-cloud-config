@@ -8,4 +8,8 @@ spring:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}
 
 limits-service:
+  users:
+    - username: test
+      password: test
+      roles:
   min: 7
