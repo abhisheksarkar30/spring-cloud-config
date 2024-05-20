@@ -1,4 +1,4 @@
-package org.edu.abhi.limitsservice.config;
+package org.edu.abhi.limitsservice.configuration;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Getter
 //Below annotation is required (for dynamic refresh) even if a separate config bean loader used by same annotation
 @ConfigurationProperties(prefix = "limits-service")
-public class Configuration {
+public class AppConfiguration {
 
     @Setter
     private int min;

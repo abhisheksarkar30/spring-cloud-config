@@ -1,0 +1,17 @@
+# Config-server details for Lower / Non-Prod Environments
+spring:
+  config:
+    # Config-server URL to be placed on env specific profile if exists, else will hit dual calls
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  cloud:
+    config:
+      username: ${CONFIG_USER:admin}
+      password: ${CONFIG_PASS:admin}
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.edu.abhi.limitsservice:
+      configuration: DEBUG
