@@ -15,3 +15,15 @@ logging:
   level:
     org.edu.abhi.limitsservice:
       configuration: DEBUG
+
+limits-service:
+  users:
+    - username: user
+      password: pass
+      roles: USER
+    - username: admin
+      password: admin
+      roles: USER, ADMIN
+    - username: anonymous
+      password: pass
+      roles:

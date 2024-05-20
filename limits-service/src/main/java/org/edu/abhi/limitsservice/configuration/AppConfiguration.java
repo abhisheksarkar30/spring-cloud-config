@@ -4,10 +4,12 @@ import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.edu.abhi.limitsservice.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -26,6 +28,8 @@ public class AppConfiguration {
     private String checkByHyphen;
     @Setter
     private String checkByDot;
+    @Setter
+    private List<User> users;
 
     @Autowired
     @Qualifier("node")
@@ -50,6 +54,7 @@ public class AppConfiguration {
         //any app bean (like singleton) which keeps old config cached needs to be manually refreshed
         //either by re-registering a new bean instead to the bean context container or setting new value inside 
         localNode = node.get("second");
+        log.debug("Users : " + users);
         log.debug("@PostConstruct executed : Refreshed properties");
     }
 }
