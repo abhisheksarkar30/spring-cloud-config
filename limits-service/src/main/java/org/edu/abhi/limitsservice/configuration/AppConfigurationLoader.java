@@ -1,4 +1,4 @@
-package org.edu.abhi.limitsservice.config;
+package org.edu.abhi.limitsservice.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class ConfigurationLoader {
+public class AppConfigurationLoader {
 
     @Bean
     //Below annotation works perfectly with complex structure for dynamic refresh & specific target config loading

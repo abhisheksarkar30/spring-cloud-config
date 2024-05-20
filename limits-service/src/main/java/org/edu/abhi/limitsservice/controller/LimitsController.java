@@ -1,6 +1,6 @@
 package org.edu.abhi.limitsservice.controller;
 
-import org.edu.abhi.limitsservice.config.Configuration;
+import org.edu.abhi.limitsservice.configuration.AppConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LimitsController {
 
     @Autowired
-    private Configuration configure;
+    private AppConfiguration configure;
 
     @Autowired
     private Environment env;
@@ -22,7 +22,7 @@ public class LimitsController {
     private int min;
 
     @GetMapping("/limitsByConfig")
-    public Configuration getLimitsByConfig() {
+    public AppConfiguration getLimitsByConfig() {
         return configure;
     }
 
