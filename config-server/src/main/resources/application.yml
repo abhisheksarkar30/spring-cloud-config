@@ -14,7 +14,7 @@ spring:
           deleteUntrackedBranches: true # to remove local branches which are removed from remote
           force-pull: true # to resolve dirty-local-state issue
     bus:
-      enabled: true
+      enabled: true # default : true
 
 config:
   username: ${CONFIG_USER:admin}
