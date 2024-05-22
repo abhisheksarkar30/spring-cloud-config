@@ -1,5 +1,6 @@
 name: Test & deploy docker-compose app
 on:
+  workflow_dispatch:
   push:
     branches:
       - docker-compose # branch name for compose app
