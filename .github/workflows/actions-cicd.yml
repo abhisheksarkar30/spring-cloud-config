@@ -31,3 +31,6 @@ jobs:
         run: mvn test -f ./limits-service/pom.xml
       - name: Package limits-service
         run: mvn jar:jar -f ./limits-service/pom.xml
+
+      - name: docker-compose build
+      - run: docker-compose build --push
