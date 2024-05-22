@@ -1,0 +1,23 @@
+name: Test & deploy docker-compose app
+on:
+  push:
+    branches:
+      - docker-compose # branch name for compose app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+
+#      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#      - run: docker build -t cygnetops/react-test -f Dockerfile.dev .
+#      - run: docker run -e CI=true cygnetops/react-test npm test
+
+      - name: Compile
+        run: mvn compile
+      - name: Test
+        run: mvn test
+      - name: Package
+        run: mvn package
