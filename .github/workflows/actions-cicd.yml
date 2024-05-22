@@ -18,15 +18,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Test config-server
-        run: mvn test -f ./config-server/pom.xml
-      - name: Package config-server
-        run: mvn jar:jar -f ./config-server/pom.xml
+      - name: Compile, test & Package config-server
+        run: mvn package -f ./config-server/pom.xml
 
-      - name: Test limits-service
-        run: mvn test -f ./limits-service/pom.xml
-      - name: Package limits-service
-        run: mvn jar:jar -f ./limits-service/pom.xml
+      - name: Compile, test & Package limits-service
+        run: mvn package -f ./limits-service/pom.xml
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
