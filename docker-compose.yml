@@ -1,6 +1,7 @@
 services:
   config-server:
     build: config-server
+    image: abhisheksarkar30/config-server
     env_file:
       - .env
     command: [""]
@@ -17,8 +18,9 @@ services:
 #      mode: replicated
 #      replicas: 2
 
-  client-dev:
+  config-client-dev:
     build: limits-service
+    image: abhisheksarkar30/config-client-dev
     env_file:
       - .env
     environment:
@@ -37,7 +39,7 @@ services:
 #    volumes: # logs persistence not required as of now
 #      - ./:/app
 
-#  client-dev2:
+#  config-client-dev2:
 #    build: limits-service
 #    env_file:
 #      - .env
