@@ -16,9 +16,16 @@ jobs:
 #      - run: docker build -t cygnetops/react-test -f Dockerfile.dev .
 #      - run: docker run -e CI=true cygnetops/react-test npm test
 
-      - name: Compile
-        run: mvn compile
-      - name: Test
-        run: mvn test
-      - name: Package
-        run: mvn package
+      - name: Compile config-server
+        run: mvn compile -f ./config-server/pom.xml
+      - name: Test config-server
+        run: mvn test -f ./config-server/pom.xml
+      - name: Package config-server
+        run: mvn package -f ./config-server/pom.xml
+
+      - name: Compile limits-service
+        run: mvn compile -f ./limits-service/pom.xml
+      - name: Test limits-service
+        run: mvn test -f ./limits-service/pom.xml
+      - name: Package limits-service
+        run: mvn package -f ./limits-service/pom.xml
