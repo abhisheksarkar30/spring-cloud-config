@@ -33,6 +33,5 @@ jobs:
   pull-deploy:
     runs-on: self-hosted
     steps:
-      - run: sshpass -p 'password' ssh \
-          -o StrictHostKeyChecking=no \
-          username@172.24.128.1 -p 2222 'whoami'
+      - run: sudo apt install net-tools
+      - run: ifconfig
