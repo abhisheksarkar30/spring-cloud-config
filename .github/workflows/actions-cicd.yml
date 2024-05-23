@@ -33,5 +33,5 @@ jobs:
   pull-deploy:
     runs-on: self-hosted
     steps:
-      - run: ssh 172.24.128.1
+      - run: sshpass -pPa5sw0rd ssh guestuser@172.24.128.1
       - run: ssh 192.168.72.200
