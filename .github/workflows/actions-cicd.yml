@@ -6,34 +6,35 @@ on:
       - docker-compose # branch name for compose app
 
 jobs:
-  # build-push:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4.1.6
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
 
-  #     - name: Setup Java JDK
-  #       uses: actions/setup-java@v4.2.1
-  #       with:
-  #         distribution: 'temurin'
-  #         java-version: '17'
-  #         cache: maven
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
 
-  #     - name: Compile, test & Package config-server
-  #       run: mvn package -f ./config-server/pom.xml
+      - name: Compile, test & Package config-server
+        run: mvn package -f ./config-server/pom.xml
 
-  #     - name: Compile, test & Package limits-service
-  #       run: mvn package -f ./limits-service/pom.xml
+      - name: Compile, test & Package limits-service
+        run: mvn package -f ./limits-service/pom.xml
 
-  #     - name: Docker login
-  #       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-  #     - name: docker-compose build
-  #       run: docker compose build --push
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: docker-compose build
+        run: docker compose build --push
         
   pull-deploy:
+    needs: build-push
     runs-on: self-hosted
     steps:
       - run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml
       - run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/.env" > .env
       - run: docker-compose down
-      - run: docker-compose up --pull always
+      - run: docker-compose up -d --pull always
