@@ -33,5 +33,7 @@ jobs:
   pull-deploy:
     runs-on: self-hosted
     steps:
-      - run: sudo apt install net-tools
-      - run: ifconfig
+      - run: curl "https://github.com/abhisheksarkar30/spring-cloud-config/blob/docker-compose/docker-compose.yml" > docker-compose.yml
+      - run: curl "https://github.com/abhisheksarkar30/spring-cloud-config/blob/docker-compose/.env" > .env
+      - run: docker-compose down
+      - run: docker-compose up --pull always
