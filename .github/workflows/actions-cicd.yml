@@ -6,25 +6,32 @@ on:
       - docker-compose # branch name for compose app
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build-push:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4.1.6
+
+  #     - name: Setup Java JDK
+  #       uses: actions/setup-java@v4.2.1
+  #       with:
+  #         distribution: 'temurin'
+  #         java-version: '17'
+  #         cache: maven
+
+  #     - name: Compile, test & Package config-server
+  #       run: mvn package -f ./config-server/pom.xml
+
+  #     - name: Compile, test & Package limits-service
+  #       run: mvn package -f ./limits-service/pom.xml
+
+  #     - name: Docker login
+  #       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: docker-compose build
+  #       run: docker compose build --push
+        
+  pull-deploy:
+    runs-on: self-hosted
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.6
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4.2.1
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Compile, test & Package config-server
-        run: mvn package -f ./config-server/pom.xml
-
-      - name: Compile, test & Package limits-service
-        run: mvn package -f ./limits-service/pom.xml
-
-      - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: docker-compose build
-        run: docker compose build --push
+      - run: ping 172.24.128.1
+      - run: ping 192.168.72.200
