@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - docker-compose # branch name for compose app
+    paths:
+      - '!**/*.md'
+      - '!**/.gitignore'
 
 jobs:
   build-push:
