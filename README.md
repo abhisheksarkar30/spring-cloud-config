@@ -26,6 +26,9 @@ doesn't support direct deployment from Cloud GitHub.
 For Windows Users:
 1. Must have WSL2 installed on your machines
 2. WSL integration must be active to communicate with the local Docker Daemon Engine.
+3. GitHub self-hosted runners must be downloaded and started in each of the VMs to deploy and 
+each must have uniquely identifiable label since same label indicates any one of VM's runner
+should perform the task, not all, but we need to deploy in all VMs.
 
 ### Kubernetes Cluster
 
