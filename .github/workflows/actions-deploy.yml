@@ -23,6 +23,6 @@ jobs:
       - name: Download .env file
         run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/.env" > .env
       - name: Down already created docker-compose containers
-        run: docker-compose down
+        run: docker-compose down --rmi
       - name: Up docker-compose container with freshly pulled images
         run: docker-compose up -d --pull always
