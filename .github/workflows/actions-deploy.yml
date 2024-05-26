@@ -1,9 +1,15 @@
-name: Pull & Deploy to ROG-VM reusable workflow
-on: [workflow_dispatch, workflow_call]
+name: Pull & Deploy reusable workflow
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      vm-label:
+        required: true
+        type: string
 
 jobs:
   pull-deploy:
-    runs-on: [self-hosted, rog-vm] # self-hosted AND rog-vm
+    runs-on: [self-hosted, ${{ inputs.vm-label }}] # self-hosted AND {{vm-label}}
     steps:
       - name: Download docker-compose file
         run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml

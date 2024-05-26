@@ -35,8 +35,12 @@ jobs:
         
   call-pull-deploy-rogvm-workflow:
     needs: build-push
-    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy-rogvm.yml@docker-compose
+    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy.yml@docker-compose
+    with:
+      vm-label: rog-vm
 
   call-pull-deploy-deskvm-workflow:
     needs: build-push
-    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy-deskvm.yml@docker-compose
+    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy.yml@docker-compose
+    with:
+      vm-label: desk-vm
