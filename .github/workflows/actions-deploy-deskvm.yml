@@ -1,0 +1,15 @@
+name: Pull & Deploy to DESK-VM reusable workflow
+on: [workflow_dispatch, workflow_call]
+
+jobs:
+  pull-deploy:
+    runs-on: [self-hosted, desk-vm] # self-hosted AND desk-vm
+    steps:
+      - name: Download docker-compose file
+        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml
+      - name: Download .env file
+        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/.env" > .env
+      - name: Down already created docker-compose containers
+        run: docker-compose down
+      - name: Up docker-compose container with freshly pulled images
+        run: docker-compose up -d --pull always

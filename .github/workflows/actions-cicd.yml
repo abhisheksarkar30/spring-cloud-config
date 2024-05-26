@@ -5,8 +5,8 @@ on:
     branches:
       - docker-compose # branch name for compose app
     paths-ignore:
-      - '!**/*.md'
-      - '!**/.gitignore'
+      - '**/*.md'
+      - '**/.gitignore'
 
 jobs:
   build-push:
@@ -33,6 +33,10 @@ jobs:
       - name: docker-compose build
         run: docker compose build --push
         
-  call-pull-deploy-workflow:
+  call-pull-deploy-rogvm-workflow:
     needs: build-push
-    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy.yml@docker-compose
+    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy-rogvm.yml@docker-compose
+
+  call-pull-deploy-deskvm-workflow:
+    needs: build-push
+    uses: abhisheksarkar30/spring-cloud-config/.github/workflows/actions-deploy-deskvm.yml@docker-compose
