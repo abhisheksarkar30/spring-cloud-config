@@ -1,11 +1,11 @@
 name: Pull & Deploy reusable workflow
 on:
-  workflow_dispatch:
-    inputs:
-      target-vm:
-        description: target vm-label
-        required: true
-        type: string
+#  workflow_dispatch:
+#    inputs:
+#      target-vm:
+#        description: target vm-label
+#        required: true
+#        type: string
   workflow_call:
     inputs:
       target-vm:
