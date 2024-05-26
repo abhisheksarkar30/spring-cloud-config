@@ -23,12 +23,14 @@ local machines under Private LAN. The same can be used for any Cloud/On-Premise 
 doesn't support direct deployment from Cloud GitHub. 
 
 #### Prerequisites
-For Windows Users:
+##### Windows Users:
 1. Must have WSL2 installed on your machines
 2. WSL integration must be active to communicate with the local Docker Daemon Engine.
-3. GitHub self-hosted runners must be downloaded and started in each of the VMs to deploy and 
-each must have uniquely identifiable label since same label indicates any one of VM's runner
-should perform the task, not all, but we need to deploy in all VMs.
+<br>
+##### All:
+1. GitHub self-hosted runners must be downloaded & started in each of the VMs to deploy.
+2. Each VM's runner must have a uniquely identifiable label since runners with the same label indicate replica runners. 
+So any one of the runners will perform the task, not all, but we need to deploy in all VMs.
 
 ### Kubernetes Cluster
 
