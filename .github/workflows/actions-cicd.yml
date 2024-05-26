@@ -40,4 +40,4 @@ jobs:
         target-vms: [ rog-vm, desk-vm ]
     uses: ./.github/workflows/actions-deploy.yml
     with:
-      target-vm: ${{ matrix.target-vms }}
+      target-vm: ${{ matrix.target-vms }} # will create separate jobs, one for each of the labels in {{ target-vms }}
