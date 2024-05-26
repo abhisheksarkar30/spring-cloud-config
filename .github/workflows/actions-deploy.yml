@@ -1,11 +1,11 @@
 name: Pull & Deploy reusable workflow
 on:
-#  workflow_dispatch:
-#    inputs:
-#      target-vm:
-#        description: target vm-label
-#        required: true
-#        type: string
+  workflow_dispatch:
+    inputs:
+      target-vm:
+        description: target vm-label
+        required: true
+        type: string
   workflow_call:
     inputs:
       target-vm:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   pull-deploy:
-    runs-on: [self-hosted, ${{ inputs.target-vm }}] # self-hosted AND {{vm-label}}
+    runs-on: [self-hosted, ${{ github.event.inputs.target-vm }}] # self-hosted AND {{vm-label}}
     steps:
       - name: Download docker-compose file
         run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml
