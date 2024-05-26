@@ -33,14 +33,11 @@ jobs:
       - name: docker-compose build
         run: docker compose build --push
         
-  call-pull-deploy-rogvm-workflow:
+  call-pull-deploy-workflow:
     needs: build-push
+    strategy:
+      matrix:
+        target-vms: [ rog-vm, desk-vm ]
     uses: ./.github/workflows/actions-deploy.yml
     with:
-      target-vm: rog-vm
-
-  call-pull-deploy-deskvm-workflow:
-    needs: build-push
-    uses: ./.github/workflows/actions-deploy.yml
-    with:
-      target-vm: desk-vm
+      target-vm: ${{ matrix.target-vms }}
