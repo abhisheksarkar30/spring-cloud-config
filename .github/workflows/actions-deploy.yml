@@ -14,7 +14,9 @@ on:
 
 jobs:
   pull-deploy:
-    runs-on: [self-hosted, rog-vm] # self-hosted AND {{vm-label}}
+    runs-on:
+      labels:
+        - ${{ inputs.target-vm }}
     steps:
       - name: Download docker-compose file
         run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml
