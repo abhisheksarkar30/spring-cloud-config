@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - docker-compose # branch name for compose app
-    paths:
+    paths-ignore:
       - '!**/*.md'
       - '!**/.gitignore'
 
