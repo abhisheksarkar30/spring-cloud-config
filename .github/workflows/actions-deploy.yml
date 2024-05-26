@@ -6,11 +6,11 @@ on:
         description: target vm-label
         required: true
         type: string
-  workflow_call:
-    inputs:
-      target-vm:
-        required: true
-        type: string
+#  workflow_call:
+#    inputs:
+#      target-vm:
+#        required: true
+#        type: string
 
 jobs:
   pull-deploy:
