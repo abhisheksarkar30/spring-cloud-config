@@ -3,9 +3,9 @@ Dockerized Configuration server with clients
 
 ![spring-cloud-config](https://github.com/abhisheksarkar30/spring-cloud-config/actions/workflows/actions-cicd.yml/badge.svg?branch=docker-compose)
 
-This is a project to implement **_Spring Cloud Config_** with the services _**Dockerized**_. <br>
-By Docker, we plan to implement all 3 categories: **_standalone containers, docker-compose, kubernetes-cluster_**. <br>
-Also, this project has **_CICD Pipeline_** setup via [GitHub Actions](https://docs.github.com/en/actions)
+This is a project to implement **_Spring Cloud Config_** in _**Dockerized**_ services secured by httpBasic 
+**_Spring Security_** with **_CICD Pipeline_** setup via [GitHub Actions](https://docs.github.com/en/actions). <br>
+By Docker, we plan to implement all 3 categories: **_standalone containers, docker-compose, kubernetes-cluster_**.
 
 ### Standalone Containers
 Branch: standalone-container <br>
