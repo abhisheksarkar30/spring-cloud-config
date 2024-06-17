@@ -18,11 +18,11 @@ jobs:
       labels:
         - ${{ inputs.target-vm }}
     steps:
-      - name: Download docker-compose file
-        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/docker-compose.yml" > docker-compose.yml
-      - name: Download .env file
-        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/docker-compose/.env" > .env
-      - name: Down already created docker-compose containers
-        run: docker-compose down --rmi all
-      - name: Up docker-compose container with freshly pulled images
-        run: docker-compose up -d --pull always
+      - name: Download Pod file
+        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/main/config-pod.yaml" > config-pod.yaml
+      - name: Download NodePort file
+        run: curl "https://raw.githubusercontent.com/abhisheksarkar30/spring-cloud-config/main/config-node-port.yaml" > config-node-port.yaml
+      - name: Recreate existing Pod config
+        run: kubectl delete -f config-pod.yaml && kubectl apply -f config-pod.yaml
+      - name: Recreate existing NodePort config
+        run: kubectl delete -f config-node-port.yaml && kubectl apply -f config-node-port.yaml

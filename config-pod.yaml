@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod
+  labels:
+    component: config
+spec:
+  containers:
+    - name: rabbit-mq
+      image: rabbitmq
+    - name: config-server
+      image: abhisheksarkar30/config-server
+      args: ["--spring.rabbitmq.host=localhost"]
+      ports:
+        - containerPort: 8888
+    - name: config-client-dev
+      image: abhisheksarkar30/config-client-dev
+      env:
+        - name: spring.rabbitmq.host
+          value: localhost
+        - name: CONFIG_SERVER_URL
+          value: http://localhost:8888
+        - name : spring.profiles.active
+          value: nonprod
+        - name: spring.cloud.config.profile
+          value: dev
+      ports:
+        - containerPort: 8080
