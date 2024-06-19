@@ -111,7 +111,6 @@
 					</execution>
 					<execution>
 						<id>limit</id>
-						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
