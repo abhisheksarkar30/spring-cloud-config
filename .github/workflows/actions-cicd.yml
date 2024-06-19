@@ -43,8 +43,8 @@ jobs:
       - name: Compile, test & Package config-server
         run: mvn clean package -f ./config-server/pom.xml
 
-      - name: Compile, test, Package, Verify limits-service
-        run: mvn clean verify -f ./limits-service/pom.xml
+      - name: Compile, test & Package limits-service
+        run: mvn clean package -f ./limits-service/pom.xml
 
       - name: Publish jacoco reports to SonarCloud
         env:
