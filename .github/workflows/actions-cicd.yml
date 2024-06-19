@@ -41,10 +41,10 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Compile, test & Package config-server
-        run: mvn package -f ./config-server/pom.xml
+        run: mvn clean package -f ./config-server/pom.xml
 
       - name: Compile, test, Package, Verify limits-service
-        run: mvn verify -f ./limits-service/pom.xml
+        run: mvn clean verify -f ./limits-service/pom.xml
 
       - name: Publish jacoco reports to SonarCloud
         env:
