@@ -57,7 +57,7 @@ jobs:
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: docker-compose build
+      - name: Build & Upload containers
         run: docker compose build --push
         
   call-pull-deploy-workflow:
