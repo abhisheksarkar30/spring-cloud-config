@@ -46,13 +46,13 @@ jobs:
       - name: Compile, test & Package limits-service
         run: mvn clean package -f ./limits-service/pom.xml
 
-      - name: Publish jacoco reports to SonarCloud
+      - name: SonarCloud analysis & QualityGate checks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar -Dsonar.projectKey=abhisheksarkar30_spring-cloud-config -f ./limits-service/pom.xml
+        run: mvn sonar:sonar -Dsonar.projectKey=abhisheksarkar30_spring-cloud-config -Dsonar.qualitygate.wait=true -f ./limits-service/pom.xml
 
-      - name: Verify coverage limits
+      - name: Jacoco coverage limits
         run: mvn org.jacoco:jacoco-maven-plugin:check@limit -f ./limits-service/pom.xml
 
       - name: Docker login
