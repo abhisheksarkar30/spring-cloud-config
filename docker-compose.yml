@@ -1,7 +1,7 @@
 services:
   config-server:
     build: config-server
-    image: abhisheksarkar30/config-server
+    image: abhisheksarkar30/config-server:compose
     env_file:
       - .env
     command: [""]
@@ -20,7 +20,7 @@ services:
 
   config-client-dev:
     build: limits-service
-    image: abhisheksarkar30/config-client-dev
+    image: abhisheksarkar30/config-client-dev:compose
     env_file:
       - .env
     environment:
